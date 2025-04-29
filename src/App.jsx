@@ -20,11 +20,9 @@ const App = () => {
     if (specializzazione === "Seleziona") newErrors.specializzazione = "Seleziona una specializzazione";
     if (!anniEsperienza) newErrors.anniEsperienza = "Indica gli anni di esperienza";
     if (!descrizione) newErrors.descrizione = "Scrivi una descrizione";
-
     setErrors(newErrors)
 
     if (Object.keys(newErrors).length > 0) return;
-
     console.log("INVIO DEL FORM:");
     console.log("- name:", name);
     console.log("- user:", username);
@@ -32,26 +30,29 @@ const App = () => {
     console.log("- spec:", specializzazione);
     console.log("- esperienza:", anniEsperienza);
     console.log("- descr:", descrizione);
+
+    resetOrTest("reset")
   }
 
-  function test() {
-    setName("Mario Rossi")
-    setUsername("Maros")
-    setPass("Mariorossi123!")
-    setSpecializzazione("Frontend")
-    setAnniEsperienza("5")
-    setDescrizione("It's a me, Mario!")
+  function resetOrTest(mode) {
+    if (mode === "test") {
+      setName("Mario Rossi");
+      setUsername("Maros");
+      setPass("Mariorossi123!");
+      setSpecializzazione("Frontend");
+      setAnniEsperienza("5");
+      setDescrizione("It's a me, Mario!");
+    } else if (mode === "reset") {
+      setName("");
+      setUsername("");
+      setPass("");
+      setSpecializzazione("Seleziona");
+      setAnniEsperienza("");
+      setDescrizione("");
+      setErrors({});
+    }
   }
 
-  function reset() {
-    setName("")
-    setUsername("")
-    setPass("")
-    setSpecializzazione("Seleziona")
-    setAnniEsperienza("")
-    setDescrizione("")
-    setErrors({});
-  }
 
   return (
     <>
@@ -129,8 +130,9 @@ const App = () => {
           {/* btn di invio e reset */}
           <div className="d-flex justify-content-center gap-2 mt-3">
             <button type="submit" className="btn btn-success">Confirm</button>
-            <button type="button" className="btn btn-danger" onClick={() => reset()}>Reset</button>
-            <button type="button" className="btn btn-warning" onClick={() => test()}>TEST</button>
+            <button type="button" className="btn btn-danger" onClick={() => resetOrTest("reset")}>Reset</button>
+            <button type="button" className="btn btn-warning" onClick={() => resetOrTest("test")}>TEST</button>
+
           </div>
 
         </form>
